@@ -13,17 +13,17 @@ def resize_image(image, size):
 def lambda_handler(event, context):
     s3_client = boto3.client('s3')
     
-    # Get the source bucket and key
+    
     source_bucket = event['Records'][0]['s3']['bucket']['name']
     source_key = event['Records'][0]['s3']['object']['key']
     
-    # Download the image from S3
+    
     image = s3_client.get_object(Bucket=source_bucket, Key=source_key)['Body']
     
-    # Resize the image
+    
     resized_image = resize_image(image, (300, 300))
     
-    # Upload the resized image to a destination bucket
+    
     destination_bucket = 'resized-images-bucket'
     destination_key = f'resized-{source_key}'
     s3_client.put_object(Bucket=destination_bucket, Key=destination_key, Body=resized_image)
@@ -33,7 +33,7 @@ def lambda_handler(event, context):
         'body': f'Image resized and saved as {destination_key} in {destination_bucket}'
     }
 
-# Example usage (this won't actually run in this environment)
+
 event = {
     'Records': [{
         's3': {

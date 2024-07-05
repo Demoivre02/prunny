@@ -1,11 +1,10 @@
 import pandas as pd
 import numpy as np
 
-# Create a sample time series dataset
+
 dates = pd.date_range(start='2023-01-01', end='2023-12-31', freq='D')
 ts = pd.Series(np.random.randn(len(dates)), index=dates)
 
-# Simple stationarity check (this is not as robust as ADF test)
 def simple_stationarity_check(timeseries):
     rolling_mean = timeseries.rolling(window=7).mean()
     rolling_std = timeseries.rolling(window=7).std()
@@ -20,15 +19,13 @@ def simple_stationarity_check(timeseries):
     else:
         print("The time series might be non-stationary")
 
-# Apply differencing
+
 def apply_differencing(timeseries):
     return timeseries.diff().dropna()
 
-# Check stationarity
 print("Original Time Series:")
 simple_stationarity_check(ts)
 
-# Apply differencing
 print("\nAfter Differencing:")
 differenced_ts = apply_differencing(ts)
 simple_stationarity_check(differenced_ts)

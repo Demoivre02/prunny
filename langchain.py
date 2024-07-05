@@ -12,15 +12,15 @@ class LangChain:
         self.llm = llm
     
     def run(self, user_input: str) -> str:
-        # In a real scenario, we might have multiple steps in the chain
+        
         prompt = f"User question: {user_input}\nPlease provide a helpful response:"
         return self.llm.generate(prompt)
 
-# Create a simple chain
+
 llm = SimpleOpenAI()
 chain = LangChain(llm)
 
-# Example usage
+
 user_question = "What is the capital of France?"
 response = chain.run(user_question)
 print(f"User: {user_question}")

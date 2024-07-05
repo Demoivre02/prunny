@@ -24,7 +24,7 @@ def simulated_api_call(url, timeout=5):
         raise SimulatedRequestException("DNS lookup failed")
     elif 'api.github.com' in parsed_url.netloc:
         if 'repos/pandas-dev/pandas/issues' in path:
-            raise SimulatedHTTPError(403)  # Simulating rate limiting
+            raise SimulatedHTTPError(403)  
     
     raise SimulatedTimeout()
 
@@ -45,13 +45,13 @@ def fetch_data_from_api(url, timeout=5):
         print(f"An unexpected error occurred: {e}")
         return None
 
-# Test the function with different scenarios
+
 urls = [
-    "https://jsonplaceholder.typicode.com/todos/1",  # Valid API
-    "https://jsonplaceholder.typicode.com/nonexistent",  # 404 error
-    "https://thisisnotarealwebsite.com",  # DNS error
-    "https://api.github.com/repos/pandas-dev/pandas/issues",  # Rate limiting
-    "https://example.com/api/data"  # Timeout
+    "https://jsonplaceholder.typicode.com/todos/1",  
+    "https://jsonplaceholder.typicode.com/nonexistent",  
+    "https://thisisnotarealwebsite.com",  
+    "https://api.github.com/repos/pandas-dev/pandas/issues",  
+    "https://example.com/api/data"  
 ]
 
 for url in urls:
